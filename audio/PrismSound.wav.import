@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/PrismSound.wav-884b72daa0155bffe05f2661c395cdca.sample"
+
+[deps]
+
+source_file="res://audio/PrismSound.wav"
+dest_files=[ "res://.import/PrismSound.wav-884b72daa0155bffe05f2661c395cdca.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

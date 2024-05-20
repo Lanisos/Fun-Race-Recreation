@@ -1,0 +1,120 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://scenes/SplitScreen.tscn" type="PackedScene" id=1]
+[ext_resource path="res://prefabs/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://prefabs/Flag.tscn" type="PackedScene" id=3]
+[ext_resource path="res://materials/Terrain.meshlib" type="MeshLibrary" id=4]
+[ext_resource path="res://prefabs/Cannon.tscn" type="PackedScene" id=5]
+[ext_resource path="res://prefabs/Xurros.tscn" type="PackedScene" id=6]
+[ext_resource path="res://prefabs/Axe.tscn" type="PackedScene" id=7]
+[ext_resource path="res://prefabs/Green Spiky Prism.tscn" type="PackedScene" id=8]
+[ext_resource path="res://prefabs/GridMap.tscn" type="PackedScene" id=9]
+[ext_resource path="res://prefabs/RespawnPoint.tscn" type="PackedScene" id=10]
+[ext_resource path="res://materials/LevelRectTesting.gdshader" type="Shader" id=11]
+[ext_resource path="res://audio/Levels.mp3" type="AudioStream" id=12]
+
+[sub_resource type="Curve3D" id=2]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0, 1.6, 1.6, 0, 0, -2.4, 0, 0, 2.4, 0, 1.6, 44.8, 0, 0, -2.56, 0, 0, 2.56, 6.4, 1.6, 51.2, 0, 0, -1.6, 0, 0, 1.6, 6.4, 1.6, 75.2, 0, 0, -2.4, 0, 0, 2.4, 0, 1.6, 80, 0, 0, 0, 0, 0, 0, 0, 1.6, 131.2 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="Curve3D" id=1]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 0.32, 0, 1.6, 0, 0, -2.4, 0, 0, 2.4, 0.32, 0, 44.8, 0, 0, -2.4, 0, 0, 2.4, -6.08, 0, 51.2, 0, 0, -1.76, 0, 0, 1.76, -6.08, 0, 75.2, 0, 0, -1.76, 0, 0, 1.76, 0.32, 0, 80, 0, 0, 0, 0, 0, 0, 0.32, 0, 131.2 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
+}
+
+[sub_resource type="PlaneMesh" id=3]
+size = Vector2( 100, 200 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 11 )
+shader_param/WATER_COL = Color( 0.439216, 0.65098, 0.956863, 1 )
+shader_param/WATER2_COL = Color( 0.372549, 0.580392, 0.862745, 1 )
+shader_param/FOAM_COL = Color( 0.862745, 0.964706, 0.968627, 1 )
+shader_param/distortion_speed = 2.0
+shader_param/tile = Vector2( 100, 200 )
+shader_param/height = 2.0
+shader_param/wave_size = Vector2( 2, 2 )
+shader_param/wave_speed = 1.5
+
+[node name="Level01" type="Spatial"]
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.889129, -0.333393, -0.313526, 0, -0.685068, 0.728479, -0.457657, -0.647712, -0.609114, -9.3063, 9.6, 0 )
+light_bake_mode = 2
+shadow_enabled = true
+
+[node name="HBoxContainer" parent="." instance=ExtResource( 1 )]
+
+[node name="Path" type="Path" parent="HBoxContainer/ViewportContainer/Viewport" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0, 0 )
+curve = SubResource( 2 )
+
+[node name="PathFollow" parent="HBoxContainer/ViewportContainer/Viewport/Path" instance=ExtResource( 2 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.6, 1.6 )
+
+[node name="Path2" type="Path" parent="HBoxContainer/ViewportContainer2/Viewport" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32, 1.6, 0 )
+curve = SubResource( 1 )
+
+[node name="PathFollow" parent="HBoxContainer/ViewportContainer2/Viewport/Path2" instance=ExtResource( 2 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.32, 0, 1.6 )
+left_player = false
+
+[node name="GridMap" parent="." instance=ExtResource( 9 )]
+mesh_library = ExtResource( 4 )
+data = {
+"cells": PoolIntArray( 0, 0, 0, 1, 0, 0, 65535, 0, 0, 0, 1, 0, 1, 1, 0, 65535, 1, 0, 0, 2, 0, 1, 2, 0, 65535, 2, 0, 0, 3, 0, 1, 3, 0, 65535, 3, 0, 0, 4, 0, 1, 4, 0, 65535, 4, 0, 0, 5, 0, 1, 5, 0, 65535, 5, 0, 0, 6, 0, 1, 6, 0, 65535, 6, 0, 0, 7, 0, 1, 7, 0, 65535, 7, 0, 0, 8, 0, 1, 8, 0, 65535, 8, 0, 0, 9, 0, 1, 9, 0, 65535, 9, 0, 0, 10, 0, 1, 10, 0, 65535, 10, 0, 0, 11, 0, 1, 11, 0, 65535, 11, 0, 0, 12, 1, 1, 12, 1, 65535, 12, 1, 0, 13, 1, 1, 13, 1, 65535, 13, 1, 0, 14, 1, 1, 14, 1, 65535, 14, 1, 0, 15, 1, 1, 15, 1, 65535, 15, 1, 0, 16, 1, 1, 16, 1, 65535, 16, 1, 0, 17, 1, 1, 17, 1, 65535, 17, 1, 0, 18, 1, 1, 18, 1, 65535, 18, 1, 0, 19, 1, 1, 19, 1, 65535, 19, 1, 0, 20, 1, 1, 20, 1, 65535, 20, 1, 0, 21, 1, 1, 21, 1, 65535, 21, 1, 0, 22, 0, 1, 22, 0, 65535, 22, 0, 0, 23, 0, 1, 23, 0, 65535, 23, 0, 0, 24, 0, 1, 24, 0, 65535, 24, 0, 0, 25, 0, 1, 25, 0, 65534, 25, 1, 65535, 25, 0, 0, 26, 0, 1, 26, 0, 65534, 26, 1, 65535, 26, 0, 0, 27, 0, 1, 27, 0, 2, 27, 0, 65534, 27, 0, 65535, 27, 0, 0, 28, 0, 1, 28, 0, 2, 28, 0, 3, 28, 0, 65533, 28, 0, 65534, 28, 0, 65535, 28, 0, 0, 29, 0, 1, 29, 0, 2, 29, 0, 3, 29, 0, 4, 29, 0, 65532, 29, 0, 65533, 29, 0, 65534, 29, 0, 65535, 29, 0, 0, 30, 1, 1, 30, 0, 2, 30, 0, 3, 30, 0, 4, 30, 0, 5, 30, 0, 65531, 30, 0, 65532, 30, 0, 65533, 30, 0, 65534, 30, 0, 65535, 30, 0, 2, 31, 0, 3, 31, 0, 4, 31, 0, 5, 31, 0, 65531, 31, 0, 65532, 31, 0, 65533, 31, 0, 65534, 31, 0, 3, 32, 0, 4, 32, 0, 5, 32, 0, 65531, 32, 0, 65532, 32, 0, 65533, 32, 0, 4, 33, 0, 5, 33, 0, 65531, 33, 0, 65532, 33, 0, 4, 34, 0, 5, 34, 0, 65531, 34, 0, 65532, 34, 0, 4, 35, 0, 5, 35, 0, 65531, 35, 0, 65532, 35, 0, 4, 36, 1, 5, 36, 1, 65531, 36, 1, 65532, 36, 1, 4, 37, 1, 5, 37, 1, 65531, 37, 1, 65532, 37, 1, 4, 38, 1, 5, 38, 1, 65531, 38, 1, 65532, 38, 1, 4, 39, 1, 5, 39, 1, 65531, 39, 1, 65532, 39, 1, 4, 40, 1, 5, 40, 1, 65531, 40, 1, 65532, 40, 1, 4, 41, 1, 5, 41, 1, 65531, 41, 1, 65532, 41, 1, 4, 42, 1, 5, 42, 1, 65531, 42, 1, 65532, 42, 1, 4, 43, 1, 5, 43, 1, 65531, 43, 1, 65532, 43, 1, 4, 44, 0, 5, 44, 0, 65531, 44, 0, 65532, 44, 0, 4, 45, 0, 5, 45, 0, 65531, 45, 0, 65532, 45, 0, 3, 46, 0, 4, 46, 0, 5, 46, 0, 65531, 46, 0, 65532, 46, 0, 65533, 46, 0, 0, 47, 1, 1, 47, 1, 2, 47, 0, 3, 47, 0, 4, 47, 0, 5, 47, 0, 65531, 47, 0, 65532, 47, 0, 65533, 47, 0, 65534, 47, 0, 65535, 47, 1, 0, 48, 0, 1, 48, 0, 2, 48, 0, 3, 48, 0, 4, 48, 0, 65531, 48, 1, 65532, 48, 0, 65533, 48, 0, 65534, 48, 0, 65535, 48, 0, 0, 49, 0, 1, 49, 0, 2, 49, 0, 3, 49, 0, 65533, 49, 0, 65534, 49, 0, 65535, 49, 0, 0, 50, 0, 1, 50, 0, 2, 50, 1, 65534, 50, 0, 65535, 50, 0, 0, 51, 0, 1, 51, 0, 2, 51, 1, 65535, 51, 0, 0, 52, 0, 1, 52, 0, 65535, 52, 0, 0, 53, 0, 1, 53, 0, 65535, 53, 0, 0, 54, 0, 1, 54, 0, 65535, 54, 0, 0, 55, 1, 1, 55, 1, 65535, 55, 1, 0, 56, 1, 1, 56, 1, 65535, 56, 1, 0, 57, 1, 1, 57, 1, 65535, 57, 1, 0, 58, 1, 1, 58, 1, 65535, 58, 1, 0, 59, 0, 1, 59, 0, 65535, 59, 0, 0, 60, 0, 1, 60, 0, 65535, 60, 0, 0, 61, 0, 1, 61, 0, 65535, 61, 0, 0, 62, 0, 1, 62, 0, 65535, 62, 0, 0, 63, 0, 1, 63, 0, 65535, 63, 0, 0, 64, 1, 1, 64, 1, 65535, 64, 1, 0, 65, 1, 1, 65, 1, 65535, 65, 1, 0, 66, 1, 1, 66, 1, 65535, 66, 1, 0, 67, 1, 1, 67, 1, 65535, 67, 1, 0, 68, 1, 1, 68, 1, 65535, 68, 1, 0, 69, 1, 1, 69, 1, 65535, 69, 1, 0, 70, 1, 1, 70, 1, 65535, 70, 1, 0, 71, 1, 1, 71, 1, 65535, 71, 1, 0, 72, 1, 1, 72, 1, 65535, 72, 1, 0, 73, 1, 1, 73, 1, 65535, 73, 1, 0, 74, 0, 1, 74, 0, 65535, 74, 0, 0, 75, 0, 1, 75, 0, 65535, 75, 0, 0, 76, 0, 1, 76, 0, 65535, 76, 0, 0, 77, 0, 1, 77, 0, 65535, 77, 0, 0, 78, 0, 1, 78, 0, 65535, 78, 0, 0, 79, 0, 1, 79, 0, 65535, 79, 0, 0, 80, 0, 1, 80, 0, 65535, 80, 0, 0, 81, 0, 1, 81, 0, 65535, 81, 0, 0, 82, 0, 1, 82, 0, 65535, 82, 0 )
+}
+
+[node name="Cannon" parent="." instance=ExtResource( 5 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.8, 0, 20.8 )
+
+[node name="Cannon3" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.88, 0, 27.04 )
+
+[node name="Cannon2" parent="." instance=ExtResource( 5 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.8, 0, 33.6 )
+
+[node name="RespawnPoint" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4, 1.6, 54.4 )
+
+[node name="RespawnPoint3" parent="." instance=ExtResource( 10 )]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 1, -1.19209e-07, 3.2, 83.2 )
+
+[node name="RespawnPoint2" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1.6, 54.4 )
+
+[node name="Green Spiky Prism" parent="." instance=ExtResource( 8 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.2, 1.6, 60.8 )
+dir_chosen = 3
+distance = 6
+
+[node name="Green Spiky Prism2" parent="." instance=ExtResource( 8 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.2, 1.6, 60.8 )
+dir_chosen = 3
+distance = 6
+
+[node name="Xurros" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 6.4, 2.08, 110.4 )
+xurro_type = 1
+
+[node name="Flag" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12, 1.6, 131.68 )
+
+[node name="Axe" parent="." instance=ExtResource( 7 )]
+transform = Transform( 0.258819, -0.965926, 0, 0.965926, 0.258819, 0, 0, 0, 1, 0.32, 11.2, 91.2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035732, 90.2327 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = -3.5
+autoplay = true
+
+[editable path="HBoxContainer"]

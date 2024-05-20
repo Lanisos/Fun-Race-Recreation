@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Wood.obj-22a889058fb7dcd30c9abc0b525dd415.mesh"
+
+[deps]
+
+files=[ "res://.import/Wood.obj-22a889058fb7dcd30c9abc0b525dd415.mesh" ]
+
+source_file="res://models/Wood.obj"
+dest_files=[ "res://.import/Wood.obj-22a889058fb7dcd30c9abc0b525dd415.mesh", "res://.import/Wood.obj-22a889058fb7dcd30c9abc0b525dd415.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

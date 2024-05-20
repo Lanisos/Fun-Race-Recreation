@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://prefabs/Closing Prism.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/Closing Prism.gd" type="Script" id=2]
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.999771, 0.012559, 0.0173241, -0.0171081, 0.955449, 0.294659, -0.0128516, -0.294888, 0.955445, 0.00696188, 3.36021, 9.07837 )
+
+[node name="Closing Prism" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.88231, 0.0388118, 0 )
+dir_chosen = 1
+distance = 7
+delay = 10
+
+[node name="Closing Prism2" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.06039, 0.0388118, 0 )
+distance = 7
+delay = 10

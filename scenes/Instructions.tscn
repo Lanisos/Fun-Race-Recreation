@@ -1,0 +1,135 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://themes/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://fonts/upheavtt.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scripts/Instructions.gd" type="Script" id=3]
+[ext_resource path="res://audio/OptionSelectSound.wav" type="AudioStream" id=4]
+[ext_resource path="res://audio/OptionPickedSound.wav" type="AudioStream" id=5]
+[ext_resource path="res://audio/Menu.mp3" type="AudioStream" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 108
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 92
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 108
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 92
+font_data = ExtResource( 2 )
+
+[node name="Instructions" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.105882, 0.152941, 0.223529, 1 )
+
+[node name="CenterContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+theme = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+alignment = 1
+
+[node name="InstrLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_top = 291.0
+margin_right = 1920.0
+margin_bottom = 409.0
+text = "Instruccions"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 449.0
+margin_right = 1920.0
+margin_bottom = 670.0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+margin_left = 21.0
+margin_right = 708.0
+margin_bottom = 221.0
+
+[node name="LeftPlLabel" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 687.0
+margin_bottom = 98.0
+custom_fonts/font = SubResource( 1 )
+text = "Left Player"
+align = 1
+
+[node name="WLabel" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 138.0
+margin_right = 687.0
+margin_bottom = 221.0
+custom_fonts/font = SubResource( 2 )
+text = "W: Avançar"
+align = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+margin_left = 712.0
+margin_right = 1034.0
+margin_bottom = 221.0
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+margin_right = 322.0
+margin_bottom = 118.0
+text = "       "
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+margin_left = 1038.0
+margin_right = 1899.0
+margin_bottom = 221.0
+
+[node name="RightPlLabel" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 861.0
+margin_bottom = 98.0
+custom_fonts/font = SubResource( 3 )
+text = "Right Player"
+align = 1
+
+[node name="ArrowLabel" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 138.0
+margin_right = 861.0
+margin_bottom = 221.0
+custom_fonts/font = SubResource( 4 )
+text = "Up arrow: avançar"
+align = 1
+
+[node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_left = 685.0
+margin_top = 710.0
+margin_right = 1235.0
+margin_bottom = 788.0
+rect_min_size = Vector2( 550, 0 )
+size_flags_horizontal = 4
+text = "Tornar enrere"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -4.0
+
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/BackButton" to="." method="_on_BackButton_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]

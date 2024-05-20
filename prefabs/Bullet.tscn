@@ -1,0 +1,63 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://models/Bullet.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://models/Bullet.png" type="Texture" id=2]
+[ext_resource path="res://scripts/Bullet.gd" type="Script" id=3]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 0.503369
+height = 0.567742
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0.304348, 0.681159, 1 )
+colors = PoolColorArray( 1, 0.515625, 0, 1, 1, 1, 1, 1, 0.160156, 0.160156, 0.160156, 1 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 0.2
+gravity = Vector3( 5, 0, 0 )
+initial_velocity = 2.0
+initial_velocity_random = 1.0
+scale = 0.78
+scale_random = 1.0
+color_ramp = SubResource( 9 )
+
+[sub_resource type="SpatialMaterial" id=6]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="CubeMesh" id=7]
+material = SubResource( 6 )
+size = Vector3( 0.1, 0.1, 0.1 )
+
+[node name="Bullet" type="Area"]
+script = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.807393, -3.36224, -0.256797 )
+mesh = ExtResource( 1 )
+material/0 = SubResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.181015, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="VisibilityNotifier" type="VisibilityNotifier" parent="."]
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.494182, 0, 0 )
+amount = 30
+lifetime = 0.3
+speed_scale = 0.9
+visibility_aabb = AABB( -0.917724, -0.598847, -0.529382, 1.33447, 1.19769, 1.05876 )
+process_material = SubResource( 5 )
+draw_pass_1 = SubResource( 7 )
+
+[connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier" to="." method="_on_VisibilityNotifier_screen_exited"]

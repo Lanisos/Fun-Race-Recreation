@@ -1,0 +1,100 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://themes/main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://scripts/MainMenu.gd" type="Script" id=2]
+[ext_resource path="res://audio/OptionPickedSound.wav" type="AudioStream" id=3]
+[ext_resource path="res://audio/OptionSelectSound.wav" type="AudioStream" id=4]
+[ext_resource path="res://audio/Menu.mp3" type="AudioStream" id=5]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.105882, 0.152941, 0.223529, 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 2.0
+margin_bottom = 2.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 563.0
+margin_top = 245.0
+margin_right = 1357.0
+margin_bottom = 835.0
+theme = ExtResource( 1 )
+alignment = 1
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 794.0
+margin_bottom = 118.0
+size_flags_horizontal = 5
+text = "FUN RACE 3d"
+align = 1
+valign = 1
+
+[node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_left = 262.0
+margin_top = 158.0
+margin_right = 532.0
+margin_bottom = 236.0
+rect_min_size = Vector2( 270, 0 )
+size_flags_horizontal = 4
+text = "JUGAR"
+
+[node name="InstrButton" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_left = 122.0
+margin_top = 276.0
+margin_right = 672.0
+margin_bottom = 354.0
+rect_min_size = Vector2( 550, 0 )
+size_flags_horizontal = 4
+text = "INSTRUCCIONS"
+
+[node name="CreditsButton" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_left = 227.0
+margin_top = 394.0
+margin_right = 567.0
+margin_bottom = 472.0
+rect_min_size = Vector2( 340, 0 )
+size_flags_horizontal = 4
+text = "CRèDITS"
+
+[node name="ExitButton" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_left = 247.0
+margin_top = 512.0
+margin_right = 547.0
+margin_bottom = 590.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 4
+text = "SORTIR"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -4.0
+
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/InstrButton" to="." method="_on_InstrButton_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/InstrButton" to="." method="_on_InstrButton_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/CreditsButton" to="." method="_on_CreditsButton_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/ExitButton" to="." method="_on_ExitButton_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]
